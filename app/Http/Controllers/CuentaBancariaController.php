@@ -10,8 +10,9 @@ class CuentaBancariaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('can:gestionar-cuentas');
+        //$this->middleware('auth');
+        //$this->middleware('can:gestionar-cuentas');
+        
     }
 
     public function index()

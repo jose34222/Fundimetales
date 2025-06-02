@@ -12,8 +12,8 @@ class VentaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('can:gestionar-ventas');
+        //$this->middleware('auth');
+        //$this->middleware('can:gestionar-ventas');
     }
 
     public function index()

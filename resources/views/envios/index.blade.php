@@ -34,7 +34,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $envio->fecha->format('d/m/Y') }}</p>
+                                             <p class="text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($envio->fecha)->format('d/m/Y') }}</p>
+
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $envio->cliente->nombre ?? 'N/A' }}</p>
@@ -46,13 +47,16 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $envio->lugar }}</p>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('envios.show', $envio->envio_id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-original-title="Ver">
+                                            <a href="{{ route('envios.show', ['envio' => $envio->id]) }}" class="btn btn-info btn-sm">
+
+
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('envios.edit', $envio->envio_id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Editar">
+                                            <a href="{{ route('envios.edit', ['envio' => $envio->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Editar">
+
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('envios.destroy', $envio->envio_id) }}" method="POST" style="display: inline-block;">
+                                            <form action="{{ route('envios.destroy', ['envio' => $envio->id]) }}" method="POST" style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este envío?')">

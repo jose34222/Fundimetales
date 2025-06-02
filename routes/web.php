@@ -6,6 +6,9 @@ use App\Http\Controllers\GastoController;
 use App\Http\Controllers\ConceptoController;	
 use App\Http\Controllers\EnvioController;
 use App\Http\Controllers\ChequeController;
+use App\Http\Controllers\CuentaBancariaController;	
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\DepositoController;	
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
@@ -19,7 +22,9 @@ Route::resource('gastos', GastoController::class)->middleware('auth');
 Route::resource('conceptos', ConceptoController::class)->middleware('auth');
 Route::resource('envios', EnvioController::class)->middleware('auth');	
 Route::resource('cheques', ChequeController::class)->middleware('auth');
-
+Route::resource('cuentas', CuentaBancariaController::class)->middleware('auth');
+Route::resource('ventas', VentaController::class)->middleware('auth');
+Route::resource('depositos', DepositoController::class)->middleware('auth');	
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
