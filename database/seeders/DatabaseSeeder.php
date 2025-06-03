@@ -22,5 +22,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@argon.com',
             'password' => bcrypt('secret')
         ]);
+
+        $this->call([
+            //UserSeeder::class,
+            CuentaBancariaSeeder::class,
+            ClienteSeeder::class,
+            ConceptoSeeder::class,
+            VentaSeeder::class,
+            GastoSeeder::class,
+            EnvioSeeder::class,
+            DepositoSeeder::class,
+            ChequeSeeder::class,
+        ]);
     }
 }

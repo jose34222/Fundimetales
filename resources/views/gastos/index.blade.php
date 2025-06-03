@@ -31,7 +31,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $gasto->fecha->format('d/m/Y') }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ \Carbon\Carbon::parse($gasto->fecha)->format('d/m/Y') }}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -42,7 +42,7 @@
                                             <span class="text-danger font-weight-bold">${{ number_format($gasto->valor, 2) }}</span>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $gasto->usuario->name }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $gasto->usuario->username }}</p>
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ route('gastos.show', $gasto) }}" class="btn btn-link text-info mb-0">

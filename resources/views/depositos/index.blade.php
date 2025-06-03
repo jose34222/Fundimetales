@@ -34,10 +34,10 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $deposito->fecha->format('d/m/Y') }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($deposito->fecha)->format('d/m/Y') }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $deposito->cuenta->nombre }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $deposito->cuenta->numero_cuenta }}</p>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">${{ number_format($deposito->valor, 2) }}</p>
@@ -46,7 +46,7 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $deposito->concepto->nombre ?? 'N/A' }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $deposito->usuario->name }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $deposito->usuario->firstname }} {{ $deposito->usuario->lastname }}</p>
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ route('depositos.show', $deposito) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-original-title="Ver">

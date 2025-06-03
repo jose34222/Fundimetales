@@ -46,8 +46,8 @@
                                         <td>{{ $cheque->banco }}</td>
                                         <td>${{ number_format($cheque->valor, 2) }}</td>
                                         <td>{{ \Carbon\Carbon::parse($cheque->fecha)->format('d/m/Y') }}</td>
-                                        <td>{{ $cheque->cuenta->nombre ?? 'Sin cuenta' }}</td>
-                                        <td>{{ $cheque->usuario->name }}</td>
+                                        <td>{{ $cheque->cuenta->numero_cuenta ?? 'Sin cuenta' }}</td>
+                                        <td>{{ $cheque->usuario->firstname }} {{ $cheque->usuario->lastname }}</td>
                                         <td class="td-actions text-right">
                                             <a rel="tooltip" class="btn btn-info btn-link" 
                                                href="{{ route('cheques.show', $cheque->id) }}" 

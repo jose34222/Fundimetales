@@ -31,12 +31,12 @@
                                 @foreach ($ventas as $venta)
                                     <tr>
                                         <td>{{ $venta->id }}</td>
-                                        <td>{{ $venta->fecha->format('d/m/Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($venta->fecha)->format('d/m/Y') }}</td>
                                         <td>{{ $venta->cliente->nombre }}</td>
                                         <td>{{ $venta->concepto->nombre }}</td>
                                         <td>${{ number_format($venta->valor, 2) }}</td>
                                         <td>{{ $venta->cuenta ? $venta->cuenta->nombre : 'N/A' }}</td>
-                                        <td>{{ $venta->usuario->name }}</td>
+                                        <td>{{ $venta->usuario->firstname }} {{ $venta->usuario->lastname }}</td>
                                         <td>
                                             <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-eye"></i>

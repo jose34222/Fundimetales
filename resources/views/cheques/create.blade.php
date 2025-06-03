@@ -76,7 +76,7 @@
                                         <select name="cuenta_id" id="cuenta_id" class="form-control form-control-alternative{{ $errors->has('cuenta_id') ? ' is-invalid' : '' }}">
                                             <option value="">Seleccione una cuenta</option>
                                             @foreach($cuentas as $cuenta)
-                                                <option value="{{ $cuenta->cuenta_id }}" {{ old('cuenta_id') == $cuenta->cuenta_id ? 'selected' : '' }}>{{ $cuenta->nombre }}</option>
+                                                <option value="{{ $cuenta->id }}" {{ old('cuenta_id') == $cuenta->id ? 'selected' : '' }}>{{ $cuenta->numero_cuenta }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('cuenta_id'))
