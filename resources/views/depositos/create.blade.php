@@ -29,7 +29,7 @@
                                         <select class="form-control @error('cuenta_id') is-invalid @enderror" id="cuenta_id" name="cuenta_id">
                                             <option value="">Seleccione una cuenta</option>
                                             @foreach($cuentas as $cuenta)
-                                                <option value="{{ $cuenta->cuenta_id }}" {{ old('cuenta_id') == $cuenta->cuenta_id ? 'selected' : '' }}>
+                                                <option value="{{ $cuenta->id }}" {{ old('cuenta_id') == $cuenta->id ? 'selected' : '' }}>
                                                     {{ $cuenta->nombre }} ({{ $cuenta->numero_cuenta }})
                                                 </option>
                                             @endforeach
@@ -56,7 +56,7 @@
                                         <select class="form-control @error('concepto_id') is-invalid @enderror" id="concepto_id" name="concepto_id">
                                             <option value="">Seleccione un concepto</option>
                                             @foreach($conceptos as $concepto)
-                                                <option value="{{ $concepto->concepto_id }}" {{ old('concepto_id') == $concepto->concepto_id ? 'selected' : '' }}>
+                                                <option value="{{ $concepto->id }}" {{ old('concepto_id') == $concepto->id ? 'selected' : '' }}>
                                                     {{ $concepto->nombre }}
                                                 </option>
                                             @endforeach

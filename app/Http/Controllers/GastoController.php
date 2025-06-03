@@ -37,7 +37,7 @@ class GastoController extends Controller
     {
         $request->validate([
             'fecha' => 'required|date',
-            'concepto_id' => 'required|exists:conceptos,concepto_id',
+            'concepto_id' => 'required',
             'valor' => 'required|numeric|min:0',
             'detalles' => 'nullable|string|max:255',
         ]);
@@ -58,7 +58,7 @@ class GastoController extends Controller
     public function edit(Gasto $gasto)
     {
         $conceptos = Concepto::where('tipo_concepto', 'GASTO')->get();
-        return view('gastos.edit', compact('gasto', 'conceptos'));
+        return view('gastos.edit', compact('conceptos'));
     }
 
     public function update(Request $request, Gasto $gasto)

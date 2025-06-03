@@ -34,9 +34,9 @@ class VentaController extends Controller
     {
         $request->validate([
             'fecha' => 'required|date',
-            'cliente_id' => 'required|exists:clientes,cliente_id',
-            'concepto_id' => 'required|exists:conceptos,concepto_id',
-            'cuenta_id' => 'nullable|exists:cuentas_bancarias,cuenta_id',
+            'cliente_id' => 'required',
+            'concepto_id' => 'required',
+            'cuenta_id' => 'nullable',
             'valor' => 'required|numeric|min:0',
             'observaciones' => 'nullable|string|max:255',
         ]);

@@ -34,7 +34,7 @@ class ChequeController extends Controller
             'banco' => 'required|string|max:50',
             'valor' => 'required|numeric|min:0',
             'observaciones' => 'nullable|string|max:255',
-            'cuenta_id' => 'nullable|exists:cuentas_bancarias,cuenta_id',
+            'cuenta_id' => 'required',
         ]);
 
         $request->merge(['user_id' => auth()->id()]);

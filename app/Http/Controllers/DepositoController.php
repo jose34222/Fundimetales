@@ -32,9 +32,9 @@ class DepositoController extends Controller
     {
         $request->validate([
             'fecha' => 'required|date',
-            'cuenta_id' => 'required|exists:cuentas_bancarias,cuenta_id',
+            'cuenta_id' => 'required',
             'valor' => 'required|numeric|min:0',
-            'concepto_id' => 'nullable|exists:conceptos,concepto_id',
+            'concepto_id' => 'required',
             'observaciones' => 'nullable|string|max:255',
         ]);
 

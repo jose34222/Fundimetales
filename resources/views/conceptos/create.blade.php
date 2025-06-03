@@ -24,9 +24,9 @@
                                     <div class="form-group">
                                         <label for="tipo_concepto" class="form-control-label">Tipo de Concepto</label>
                                         <select class="form-control" id="tipo_concepto" name="tipo_concepto" required>
-                                            <option value="ingreso">Ingreso</option>
-                                            <option value="egreso">Egreso</option>
-                                            <option value="transferencia">Transferencia</option>
+                                            <option value="INGRESO">Ingreso</option>
+                                            <option value="GASTO">Gasto</option>
+                                            <option value="TRANSFERENCIA">Transferencia</option>
                                         </select>
                                     </div>
                                 </div>
