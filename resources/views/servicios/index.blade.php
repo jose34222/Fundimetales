@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Gestión de Ventas'])
+@extends('layouts.app', ['title' => 'Gestión de Servicios'])
 
 @section('content')
 <div class="content">
@@ -7,8 +7,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Ventas</h4>
-                        <p class="card-category">Listado de ventas registradas</p>
+                        <h4 class="card-title">Servicios</h4>
+                        <p class="card-category">Listado de servicios registrados</p>
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -21,8 +21,8 @@
                         @endif
                         <div class="row">
                             <div class="col-12 text-right">
-                                <a href="{{ route('ventas.create') }}" class="btn btn-sm btn-primary">
-                                    <i class="material-icons">add</i> Nueva Venta
+                                <a href="{{ route('servicios.create') }}" class="btn btn-sm btn-primary">
+                                    <i class="material-icons">add</i> Nuevo Servicio
                                 </a>
                             </div>
                         </div>
@@ -30,43 +30,39 @@
                             <table class="table">
                                 <thead class="text-primary">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Fecha</th>
-                                        <th>Cliente</th>
-                                        <th>Concepto</th>
-                                        <th>Valor</th>
-                                        <th>Registrado por</th>
+                                        <th>Código</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Precio</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ventas as $venta)
+                                    @foreach ($servicios as $servicio)
                                     <tr>
-                                        <td>{{ $venta->id }}</td>
-                                        <td>{{ $venta->fecha->format('d/m/Y') }}</td>
-                                        <td>{{ $venta->cliente->nombre }}</td>
-                                        <td>{{ $venta->concepto->nombre }}</td>
-                                        <td class="text-primary">${{ number_format($venta->valor, 2) }}</td>
-                                        <td>{{ $venta->usuario->name }}</td>
+                                        <td>{{ $servicio->codigo }}</td>
+                                        <td>{{ $servicio->nombre }}</td>
+                                        <td>{{ Str::limit($servicio->descripcion, 50) ?? 'Sin descripción' }}</td>
+                                        <td>${{ number_format($servicio->precio, 2) }}</td>
                                         <td class="td-actions text-right">
                                             <a rel="tooltip" class="btn btn-info btn-link" 
-                                               href="{{ route('ventas.show', $venta->id) }}" 
+                                               href="{{ route('servicios.show', $servicio->id) }}" 
                                                data-original-title="" title="">
                                                 <i class="material-icons">visibility</i>
                                                 <div class="ripple-container"></div>
                                             </a>
                                             <a rel="tooltip" class="btn btn-success btn-link" 
-                                               href="{{ route('ventas.edit', $venta->id) }}" 
+                                               href="{{ route('servicios.edit', $servicio->id) }}" 
                                                data-original-title="" title="">
                                                 <i class="material-icons">edit</i>
                                                 <div class="ripple-container"></div>
                                             </a>
-                                            <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" style="display: inline-block;">
+                                            <form action="{{ route('servicios.destroy', $servicio->id) }}" method="POST" style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" rel="tooltip" class="btn btn-danger btn-link" 
                                                         data-original-title="" title=""
-                                                        onclick="return confirm('¿Estás seguro de eliminar esta venta?')">
+                                                        onclick="return confirm('¿Estás seguro de eliminar este servicio?')">
                                                     <i class="material-icons">close</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
@@ -76,9 +72,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-center">
-                                {{ $ventas->links() }}
-                            </div>
                         </div>
                     </div>
                 </div>

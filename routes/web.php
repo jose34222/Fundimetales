@@ -15,7 +15,12 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-use App\Http\Controllers\ChangePassword;            
+use App\Http\Controllers\ChangePassword; 
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\MovimientoInventarioController;
 
 Route::resource('clientes', ClienteController::class)->middleware('auth');
 Route::resource('gastos', GastoController::class)->middleware('auth');
@@ -25,8 +30,35 @@ Route::resource('cheques', ChequeController::class)->middleware('auth');
 Route::resource('cuentas', CuentaBancariaController::class)->middleware('auth');
 Route::resource('ventas', VentaController::class)->middleware('auth');
 Route::resource('depositos', DepositoController::class)->middleware('auth');	
+Route::resource('categorias', CategoriaController::class)->middleware('auth');
+Route::get('categorias/{id}/productos', [CategoriaController::class, 'productos'])->name('categorias.productos')->middleware('auth');
+Route::resource('proveedores', ProveedorController::class);
+Route::get('proveedores/{id}/productos', [ProveedorController::class, 'productos'])->name('proveedores.productos');
+Route::resource('servicios', ServicioController::class)->middleware('auth');
+Route::resource('productos', ProductoController::class)->middleware('auth');
+// Rutas personalizadas para Kardex, Entrada y Ajuste de Inventario
+Route::get('productos/{id}/kardex', [ProductoController::class, 'kardex'])->name('productos.kardex');
+Route::post('productos/{id}/entrada', [ProductoController::class, 'entradaInventario'])->name('productos.entrada');
+Route::post('productos/{id}/ajuste', [ProductoController::class, 'ajusteInventario'])->name('productos.ajuste');
 
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
+// Mostrar todos los movimientos de inventario
+Route::get('/movimientos', [MovimientoInventarioController::class, 'index'])->name('movimientos.index');
+
+// Mostrar movimientos de un producto específico
+Route::get('/movimientos/producto/{productoId}', [MovimientoInventarioController::class, 'movimientosPorProducto'])->name('movimientos.por-producto');
+
+// Mostrar movimientos entre fechas específicas
+Route::post('/movimientos/por-fecha', [MovimientoInventarioController::class, 'movimientosPorFecha'])->name('movimientos.por-fecha');
+
+// Mostrar resumen de inventario (todos los productos)
+Route::get('/movimientos/resumen-inventario', [MovimientoInventarioController::class, 'resumenInventario'])->name('movimientos.resumen');
+
+// Mostrar productos con stock bajo o igual al mínimo
+Route::get('/movimientos/productos-bajo-stock', [MovimientoInventarioController::class, 'productosBajoStock'])->name('movimientos.bajo-stock');
+
+Route::get('/', function () {
+    return redirect('/dashboard');
+})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');

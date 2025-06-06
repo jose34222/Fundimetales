@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Venta extends Model
 {
     use HasFactory;
-
- 
+    
     protected $fillable = [
         'fecha',
         'cliente_id',
@@ -38,5 +37,21 @@ class Venta extends Model
     public function usuario()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Nueva relación con productos (para venta de productos)
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'venta_productos')
+            ->withPivot('cantidad', 'precio_unitario', 'subtotal')
+            ->withTimestamps();
+    }
+
+    // Nueva relación con servicios (para venta de servicios)
+    public function servicios()
+    {
+        return $this->belongsToMany(Servicio::class, 'venta_servicios')
+            ->withPivot('cantidad', 'precio_unitario', 'subtotal')
+            ->withTimestamps();
     }
 }
